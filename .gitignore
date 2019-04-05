@@ -1,0 +1,12 @@
+#ant specific
+dist/
+build/
+
+
+#netbeans specific
+core
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
+
+*.class
