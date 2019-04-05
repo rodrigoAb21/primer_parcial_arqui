@@ -7,18 +7,18 @@ package vista;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import modelo.M_Tipo;
+import modelo.M_Herramienta;
 
 /**
  *
  * @author KAKU
  */
-public class V_Tipo extends javax.swing.JFrame {
+public class V_Herramienta extends javax.swing.JFrame {
 
     /**
      * Creates new form Vista_Principal
      */
-    public V_Tipo() {
+    public V_Herramienta() {
         initComponents();
     }
 
@@ -41,6 +41,8 @@ public class V_Tipo extends javax.swing.JFrame {
         btn_limpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        txt_marca = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,13 +60,13 @@ public class V_Tipo extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE"
+                "ID", "NOMBRE", "MARCA"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,6 +75,8 @@ public class V_Tipo extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabla);
+
+        jLabel4.setText("MARCA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,13 +87,17 @@ public class V_Tipo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                                 .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -107,21 +115,22 @@ public class V_Tipo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_registrar)
-                        .addComponent(btn_editar)
-                        .addComponent(btn_eliminar)
-                        .addComponent(btn_limpiar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(btn_registrar)
+                    .addComponent(btn_editar)
+                    .addComponent(btn_eliminar)
+                    .addComponent(btn_limpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -135,6 +144,7 @@ public class V_Tipo extends javax.swing.JFrame {
         int fila = tabla.getSelectedRow();
         txt_id.setText(m.getValueAt(fila, 0).toString());
         txt_nombre.setText(m.getValueAt(fila, 1).toString());
+        txt_marca.setText(m.getValueAt(fila, 2).toString());
     }//GEN-LAST:event_tablaMouseClicked
 
     
@@ -144,18 +154,21 @@ public class V_Tipo extends javax.swing.JFrame {
     public void limpiarCampos(){
         txt_id.setText("");
         txt_nombre.setText("");
+        txt_marca.setText("");
     }
     
-    public void actualizarTabla(ArrayList<M_Tipo> tipos){
+    public void actualizarTabla(ArrayList<M_Herramienta> herramientas){
         DefaultTableModel dtm = new DefaultTableModel();
         tabla.setModel(dtm);
         dtm.addColumn("ID");
         dtm.addColumn("NOMBRE");
+        dtm.addColumn("MARCA");
         
-        Object[] fila = new Object[2];
-        for (int i = 0; i < tipos.size(); i++) {
-            fila[0] = tipos.get(i).getId();
-            fila[1] = tipos.get(i).getNombre();
+        Object[] fila = new Object[5];
+        for (int i = 0; i < herramientas.size(); i++) {
+            fila[0] = herramientas.get(i).getId();
+            fila[1] = herramientas.get(i).getNombre();
+            fila[2] = herramientas.get(i).getMarca();
             
             dtm.addRow(fila);
         }
@@ -205,9 +218,11 @@ public class V_Tipo extends javax.swing.JFrame {
     public javax.swing.JButton btn_registrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tabla;
     public javax.swing.JTextField txt_id;
+    public javax.swing.JTextField txt_marca;
     public javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }

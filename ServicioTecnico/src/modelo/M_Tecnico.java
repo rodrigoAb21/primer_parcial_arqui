@@ -16,18 +16,21 @@ import java.util.ArrayList;
  */
 public class M_Tecnico {
     private int id;
-    private String marca;
+    private String ci;
     private String nombre;
     private String apellido;
+    private String especialidad;
     private String direccion;
     private String telefono;
     private ConexionBD db;
 
-    public M_Tecnico(int id, String ci, String nombre, String apellido, String direccion, String telefono) {
+    public M_Tecnico(int id, String ci, String nombre, String apellido, 
+            String especialidad, String direccion, String telefono) {
         this.id = id;
-        this.marca = ci;
+        this.ci = ci;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.especialidad = especialidad;
         this.direccion = direccion;
         this.telefono = telefono;
         db = new ConexionBD();
@@ -35,9 +38,10 @@ public class M_Tecnico {
 
     public M_Tecnico() {
         this.id = 0;
-        this.marca = "";
+        this.ci = "";
         this.nombre = "";
         this.apellido = "";
+        this.especialidad = "";
         this.direccion = "";
         this.telefono = "";
         db = new ConexionBD();
@@ -62,11 +66,11 @@ public class M_Tecnico {
     }
 
     public String getCi() {
-        return marca;
+        return ci;
     }
 
     public void setCi(String ci) {
-        this.marca = ci;
+        this.ci = ci;
     }
 
     public String getApellido() {
@@ -92,6 +96,14 @@ public class M_Tecnico {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
     
     
     
@@ -100,14 +112,15 @@ public class M_Tecnico {
         try {
             db.conectar();
             String sql = "INSERT INTO tecnico (id, ci, nombre, apellido, " + 
-                    "direccion, telefono) VALUES (?, ?, ?, ?, ?, ?)" ;
+                    "especialidad, direccion, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)" ;
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
             ps.setInt(1, this.id);
-            ps.setString(2, this.marca);
+            ps.setString(2, this.ci);
             ps.setString(3, this.nombre);
             ps.setString(4, this.apellido);
-            ps.setString(5, this.direccion);
-            ps.setString(6, this.telefono);
+            ps.setString(5, this.especialidad);
+            ps.setString(6, this.direccion);
+            ps.setString(7, this.telefono);
             
             int i = ps.executeUpdate();
             db.desconectar();
@@ -127,15 +140,17 @@ public class M_Tecnico {
                     "ci = ?, " +
                     "nombre = ?, " +
                     "apellido = ?, " +
+                    "especialidad = ?, " +
                     "direccion = ?, " +
                     "telefono = ? " + "WHERE id = ?";
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
-            ps.setString(1, this.marca);
+            ps.setString(1, this.ci);
             ps.setString(2, this.nombre);
             ps.setString(3, this.apellido);
-            ps.setString(4, this.direccion);
-            ps.setString(5, this.telefono);
-            ps.setInt(6, this.id);
+            ps.setString(4, this.especialidad);
+            ps.setString(5, this.direccion);
+            ps.setString(6, this.telefono);
+            ps.setInt(7, this.id);
             
             int i = ps.executeUpdate();
             db.desconectar();
@@ -180,6 +195,7 @@ public class M_Tecnico {
                 tecnico.setCi(rs.getString("ci"));
                 tecnico.setNombre(rs.getString("nombre"));
                 tecnico.setApellido(rs.getString("apellido"));
+                tecnico.setEspecialidad(rs.getString("especialidad"));
                 tecnico.setDireccion(rs.getString("direccion"));
                 tecnico.setTelefono(rs.getString("telefono"));
                 
