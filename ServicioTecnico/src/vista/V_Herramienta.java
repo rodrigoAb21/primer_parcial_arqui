@@ -164,7 +164,7 @@ public class V_Herramienta extends javax.swing.JFrame {
         dtm.addColumn("NOMBRE");
         dtm.addColumn("MARCA");
         
-        Object[] fila = new Object[5];
+        Object[] fila = new Object[3];
         for (int i = 0; i < herramientas.size(); i++) {
             fila[0] = herramientas.get(i).getId();
             fila[1] = herramientas.get(i).getNombre();

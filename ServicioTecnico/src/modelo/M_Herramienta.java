@@ -88,7 +88,7 @@ public class M_Herramienta {
             db.conectar();
             String sql = "UPDATE herramienta SET " + 
                     "nombre = ?, " +
-                    "marca = ?, " + "WHERE id = ?";
+                    "marca = ? " + "WHERE id = ?";
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
             ps.setString(1, this.nombre);
             ps.setString(2, this.marca);
