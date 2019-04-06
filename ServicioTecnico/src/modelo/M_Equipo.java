@@ -173,7 +173,7 @@ public class M_Equipo {
             db.desconectar();
             
         } catch (SQLException e) {
-            System.out.println("No se pudo obtener los tipos.");
+            System.out.println("No se pudo obtener los equipos.");
             System.out.println(e.getMessage());
         }
         return equipos;
