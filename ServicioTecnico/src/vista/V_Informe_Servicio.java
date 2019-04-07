@@ -10,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.M_Informe_Servicio;
 import modelo.M_Cliente;
+import modelo.M_Equipo;
 
 /**
  *
@@ -52,18 +53,19 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        selector_equipo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_observacion = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tabla1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tabla_detalle = new javax.swing.JTable();
+        btn_agregar = new javax.swing.JButton();
+        btn_quitar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txt_fecha_finalizacion = new javax.swing.JTextField();
+        btn_editar_detalle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,15 +112,15 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
 
         jLabel8.setText("EQUIPO");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selector_equipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("OBSERVACION");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txt_observacion.setColumns(20);
+        txt_observacion.setRows(5);
+        jScrollPane2.setViewportView(txt_observacion);
 
-        tabla1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_detalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -126,22 +128,24 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
 
             }
         ));
-        tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabla_detalle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabla1MouseClicked(evt);
+                tabla_detalleMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tabla1);
+        jScrollPane3.setViewportView(tabla_detalle);
 
-        jButton1.setText("AGREGAR");
+        btn_agregar.setText("AGREGAR");
 
-        jButton2.setText("QUITAR");
+        btn_quitar.setText("QUITAR");
 
         jButton3.setText("GESTIONAR TRABAJOS");
 
         jButton4.setText("FINALIZAR SERVICIO");
 
         jLabel10.setText("F. FINALIZACION");
+
+        btn_editar_detalle.setText("EDITAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,22 +175,16 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
                                                 .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btn_registrar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButton1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton2))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btn_editar)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btn_eliminar)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btn_limpiar))))
+                                        .addComponent(btn_editar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_eliminar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_limpiar))
                                     .addComponent(jLabel5)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(selector_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,15 +199,22 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(selector_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btn_agregar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_editar_detalle)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btn_quitar))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(268, 268, 268)
                                 .addComponent(jButton3))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(271, 271, 271)
                                 .addComponent(jButton4)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(25, 25, 25)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -246,9 +251,10 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(selector_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_agregar)
+                    .addComponent(btn_quitar)
+                    .addComponent(btn_editar_detalle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -289,9 +295,9 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabla_serviciosMouseClicked
 
-    private void tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla1MouseClicked
+    private void tabla_detalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_detalleMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_tabla1MouseClicked
+    }//GEN-LAST:event_tabla_detalleMouseClicked
 
     
     
@@ -330,12 +336,20 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
         
     }
     
-    public void cargarSelector(ArrayList<M_Cliente> clientes) {
+    public void cargarSelectorCliente(ArrayList<M_Cliente> clientes) {
         ArrayList t = new ArrayList();
         for (int i = 0; i < clientes.size(); i++) {
             t.add(clientes.get(i).getId() + ", " + clientes.get(i).getNombre());
         }
         this.selector_cliente.setModel(new DefaultComboBoxModel(t.toArray()));
+    }
+    
+    public void cargarSelectorEquipo(ArrayList<M_Equipo> equipos) {
+        ArrayList t = new ArrayList();
+        for (int i = 0; i < equipos.size(); i++) {
+            t.add(equipos.get(i).getId() + ", " + equipos.get(i).getNro_serie());
+        }
+        this.selector_equipo.setModel(new DefaultComboBoxModel(t.toArray()));
     }
     
     
@@ -375,15 +389,15 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btn_agregar;
     public javax.swing.JButton btn_editar;
+    public javax.swing.JButton btn_editar_detalle;
     public javax.swing.JButton btn_eliminar;
     public javax.swing.JButton btn_limpiar;
+    public javax.swing.JButton btn_quitar;
     public javax.swing.JButton btn_registrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -397,14 +411,15 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     public javax.swing.JComboBox<String> selector_cliente;
-    public javax.swing.JTable tabla1;
+    public javax.swing.JComboBox<String> selector_equipo;
+    public javax.swing.JTable tabla_detalle;
     public javax.swing.JTable tabla_servicios;
     public javax.swing.JTextField txt_costo_total;
     public javax.swing.JTextField txt_estado;
     public javax.swing.JTextField txt_fecha_finalizacion;
     public javax.swing.JTextField txt_fecha_recepcion;
     public javax.swing.JTextField txt_id;
+    public javax.swing.JTextArea txt_observacion;
     // End of variables declaration//GEN-END:variables
 }

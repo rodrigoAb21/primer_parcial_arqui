@@ -128,10 +128,8 @@ public class M_Informe_Servicio {
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
             ps.setString(1, this.fecha_recepcion);
             ps.setString(2, this.fecha_finalizacion);
-            ps.setFloat(3, this.costo_total);
-            ps.setString(4, this.estado);
-            ps.setInt(5, this.cliente_id);
-            ps.setInt(6, this.id);
+            ps.setInt(3, this.cliente_id);
+            ps.setInt(4, this.id);
             
             int i = ps.executeUpdate();
             db.desconectar();
