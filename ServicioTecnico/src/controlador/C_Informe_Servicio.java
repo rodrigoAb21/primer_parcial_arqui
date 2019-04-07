@@ -70,8 +70,10 @@ public class C_Informe_Servicio implements ActionListener {
         vista_informe_servicio.actualizarTablaInformes(modelo_informe_servicio.getInformes());
         vista_informe_servicio.cargarSelectorCliente(modelo_cliente.getClientesAsc());
         vista_informe_servicio.cargarSelectorEquipo(modelo_equipo.getEquipos());
-        
-        
+    }
+    
+    private void actualizarTablaInforme(){
+        vista_informe_servicio.actualizarTablaInformes(modelo_informe_servicio.getInformes());
     }
     
     private void actualizarTotal(int informe_id){
@@ -166,7 +168,7 @@ public class C_Informe_Servicio implements ActionListener {
             int id = Integer.parseInt(vista_informe_servicio.tabla_servicios.getValueAt(fila, 0).toString());
             this.informe_seleccionado = id;
             actualizarTotal(id);
-            actualizarVista();
+            actualizarTablaInforme();
             vista_informe_servicio.actualizarTablaDetalle(modelo_detalle.getDetalles(id));
             
         }
@@ -176,7 +178,7 @@ public class C_Informe_Servicio implements ActionListener {
      private void recargarDetalle(int id){
         if (id > 0) {
             actualizarTotal(id);
-            actualizarVista();
+            actualizarTablaInforme();
             vista_informe_servicio.actualizarTablaDetalle(modelo_detalle.getDetalles(id));
         }
         
