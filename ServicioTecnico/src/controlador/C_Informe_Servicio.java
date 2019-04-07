@@ -51,7 +51,6 @@ public class C_Informe_Servicio implements ActionListener {
         // Botones Detalle
         this.vista_informe_servicio.btn_agregar.addActionListener(this);
         this.vista_informe_servicio.btn_quitar.addActionListener(this);
-        this.vista_informe_servicio.btn_editar_detalle.addActionListener(this);
         
         // Selectores
         this.vista_informe_servicio.selector_cliente.addActionListener(this);
@@ -134,10 +133,7 @@ public class C_Informe_Servicio implements ActionListener {
         } else if (e.getSource() == vista_informe_servicio.btn_agregar) {
             // AGREGAR DETALLE
             // Se debe registrar un nuevo detalle servicio y actualizar tabla detalle
-
-
             modelo_detalle.setInforme_id(this.informe_seleccionado);
-
             String equipo[] = vista_informe_servicio.selector_equipo.getSelectedItem().toString().split(",");
             modelo_detalle.setEquipo_id(Integer.parseInt(equipo[0]));
 
@@ -145,17 +141,16 @@ public class C_Informe_Servicio implements ActionListener {
             modelo_detalle.setObservacion(vista_informe_servicio.txt_observacion.getText().toString());
             modelo_detalle.registrar();
             recargarDetalle(this.informe_seleccionado);
-
-            
-            // Se debe actualizar el costo total del servicio
-        } else if (e.getSource() == vista_informe_servicio.btn_editar_detalle) {
-            // EDITAR DETALLE
-            // Se debe editar el detalle servicio selec y actualizar la tabla detalle
-            // Se debe actualizar el costo total del servicio
         } else if (e.getSource() == vista_informe_servicio.btn_quitar) {
             // QUITAR DETALLE
-            // Se debe eliminar el detalle servicio y actualizar la tabla detalle
-            // Se debe actualizar el costo total del servicio
+            int fila = vista_informe_servicio.tabla_detalle.getSelectedRow();
+            if (fila >= 0) {
+                int equipo_id = Integer.parseInt(vista_informe_servicio.tabla_detalle.getValueAt(fila, 1).toString());
+                modelo_detalle.setInforme_id(this.informe_seleccionado);
+                modelo_detalle.setEquipo_id(equipo_id);
+                modelo_detalle.eliminar();
+                recargarDetalle(informe_seleccionado);
+            }
         } else if (e.getSource() == vista_informe_servicio.btn_cargar_detalle) {
             // CARGAR DETALLE
             cargarDetalle();
