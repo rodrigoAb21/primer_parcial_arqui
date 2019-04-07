@@ -69,8 +69,7 @@ public class M_Detalle_Informe {
         this.observacion = observacion;
     }
     
-    
-    
+        
     // METODOS
     public boolean registrar(){
         try {
