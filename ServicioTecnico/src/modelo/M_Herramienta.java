@@ -16,20 +16,20 @@ import java.util.ArrayList;
  */
 public class M_Herramienta {
     private int id;
-    private String nombre;
+    private String descripcion;
     private String marca;
     private ConexionBD db;
 
-    public M_Herramienta(int id, String nombre, String marca) {
+    public M_Herramienta(int id, String descripcion, String marca) {
         this.id = id;
-        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.marca = marca;
         db = new ConexionBD();
     }
 
     public M_Herramienta() {
         this.id = 0;
-        this.nombre = "";
+        this.descripcion = "";
         this.marca = "";
         db = new ConexionBD();
     }
@@ -42,12 +42,12 @@ public class M_Herramienta {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getMarca() {
@@ -65,11 +65,11 @@ public class M_Herramienta {
     public boolean registrar(){
         try {
             db.conectar();
-            String sql = "INSERT INTO herramienta (id, nombre, marca) " + 
+            String sql = "INSERT INTO herramienta (id, descripcion, marca) " + 
                     " VALUES (?, ?, ?)" ;
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
             ps.setInt(1, this.id);
-            ps.setString(2, this.nombre);
+            ps.setString(2, this.descripcion);
             ps.setString(3, this.marca);
             
             int i = ps.executeUpdate();
@@ -87,10 +87,10 @@ public class M_Herramienta {
          try {
             db.conectar();
             String sql = "UPDATE herramienta SET " + 
-                    "nombre = ?, " +
+                    "descripcion = ?, " +
                     "marca = ? " + "WHERE id = ?";
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
-            ps.setString(1, this.nombre);
+            ps.setString(1, this.descripcion);
             ps.setString(2, this.marca);
             ps.setInt(3, this.id);
             
@@ -134,7 +134,7 @@ public class M_Herramienta {
             while (rs.next()){
                 M_Herramienta herramienta = new M_Herramienta();
                 herramienta.setId(rs.getInt("id"));
-                herramienta.setNombre(rs.getString("nombre"));
+                herramienta.setDescripcion(rs.getString("descripcion"));
                 herramienta.setMarca(rs.getString("marca"));
                 
                 herramientas.add(herramienta);

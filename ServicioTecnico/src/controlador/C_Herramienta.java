@@ -47,7 +47,7 @@ public class C_Herramienta implements ActionListener {
          // Registrar 
         if (e.getSource() == vista_herramienta.btn_registrar) {
             modelo_herramienta.setId(Integer.parseInt(vista_herramienta.txt_id.getText()));
-            modelo_herramienta.setNombre(vista_herramienta.txt_nombre.getText());
+            modelo_herramienta.setDescripcion(vista_herramienta.txt_descripcion.getText());
             modelo_herramienta.setMarca(vista_herramienta.txt_marca.getText());
             
             if (modelo_herramienta.registrar()) {
@@ -61,7 +61,7 @@ public class C_Herramienta implements ActionListener {
             // EDITAR
             if (e.getSource() == vista_herramienta.btn_editar) {
                 modelo_herramienta.setId(Integer.parseInt(vista_herramienta.txt_id.getText()));
-                modelo_herramienta.setNombre(vista_herramienta.txt_nombre.getText());
+                modelo_herramienta.setDescripcion(vista_herramienta.txt_descripcion.getText());
                 modelo_herramienta.setMarca(vista_herramienta.txt_marca.getText());
 
                 if (modelo_herramienta.editar()) {

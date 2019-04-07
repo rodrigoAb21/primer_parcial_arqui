@@ -54,6 +54,7 @@ public class C_Informe_Servicio implements ActionListener {
         if (e.getSource() == vista_informe_servicio.btn_registrar) {
             modelo_informe_servicio.setId(Integer.parseInt(vista_informe_servicio.txt_id.getText()));
             modelo_informe_servicio.setFecha_recepcion(vista_informe_servicio.txt_fecha_recepcion.getText());
+            modelo_informe_servicio.setFecha_finalizacion(vista_informe_servicio.txt_fecha_finalizacion.getText());
             modelo_informe_servicio.setCosto_total(Float.parseFloat(vista_informe_servicio.txt_costo_total.getText()));
             modelo_informe_servicio.setEstado(vista_informe_servicio.txt_estado.getText());
             
@@ -72,6 +73,7 @@ public class C_Informe_Servicio implements ActionListener {
             if (e.getSource() == vista_informe_servicio.btn_editar) {
                 modelo_informe_servicio.setId(Integer.parseInt(vista_informe_servicio.txt_id.getText()));
                 modelo_informe_servicio.setFecha_recepcion(vista_informe_servicio.txt_fecha_recepcion.getText());
+                modelo_informe_servicio.setFecha_finalizacion(vista_informe_servicio.txt_fecha_finalizacion.getText());
                                  
                 String tipo[] = vista_informe_servicio.selector_cliente.getSelectedItem().toString().split(",");
                 modelo_informe_servicio.setCliente_id(Integer.parseInt(tipo[0]));

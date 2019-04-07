@@ -34,7 +34,7 @@ public class V_Herramienta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_id = new javax.swing.JTextField();
-        txt_nombre = new javax.swing.JTextField();
+        txt_descripcion = new javax.swing.JTextField();
         btn_registrar = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
@@ -48,7 +48,7 @@ public class V_Herramienta extends javax.swing.JFrame {
 
         jLabel1.setText("ID");
 
-        jLabel3.setText("NOMBRE");
+        jLabel3.setText("DESCRIPCION");
 
         btn_registrar.setText("REGISTRAR");
 
@@ -97,7 +97,7 @@ public class V_Herramienta extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10)
                         .addComponent(btn_registrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -117,7 +117,7 @@ public class V_Herramienta extends javax.swing.JFrame {
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -140,7 +140,7 @@ public class V_Herramienta extends javax.swing.JFrame {
         DefaultTableModel m = (DefaultTableModel) tabla.getModel();
         int fila = tabla.getSelectedRow();
         txt_id.setText(m.getValueAt(fila, 0).toString());
-        txt_nombre.setText(m.getValueAt(fila, 1).toString());
+        txt_descripcion.setText(m.getValueAt(fila, 1).toString());
         txt_marca.setText(m.getValueAt(fila, 2).toString());
     }//GEN-LAST:event_tablaMouseClicked
 
@@ -150,7 +150,7 @@ public class V_Herramienta extends javax.swing.JFrame {
     // FUNCIONES PROPIAS
     public void limpiarCampos(){
         txt_id.setText("");
-        txt_nombre.setText("");
+        txt_descripcion.setText("");
         txt_marca.setText("");
     }
     
@@ -158,13 +158,13 @@ public class V_Herramienta extends javax.swing.JFrame {
         DefaultTableModel dtm = new DefaultTableModel();
         tabla.setModel(dtm);
         dtm.addColumn("ID");
-        dtm.addColumn("NOMBRE");
+        dtm.addColumn("DESCRIPCION");
         dtm.addColumn("MARCA");
         
         Object[] fila = new Object[3];
         for (int i = 0; i < herramientas.size(); i++) {
             fila[0] = herramientas.get(i).getId();
-            fila[1] = herramientas.get(i).getNombre();
+            fila[1] = herramientas.get(i).getDescripcion();
             fila[2] = herramientas.get(i).getMarca();
             
             dtm.addRow(fila);
@@ -218,8 +218,8 @@ public class V_Herramienta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tabla;
+    public javax.swing.JTextField txt_descripcion;
     public javax.swing.JTextField txt_id;
     public javax.swing.JTextField txt_marca;
-    public javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }
