@@ -133,6 +133,31 @@ public class M_Tipo {
         return tipos;
     }
     
+        public ArrayList<M_Tipo> getTiposAsc(){
+        ArrayList<M_Tipo> tipos = new ArrayList<>();
+        try {
+            db.conectar();
+            String query = "SELECT * FROM tipo ORDER BY(id) ASC";
+            PreparedStatement ps = db.getConexion().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                M_Tipo tipo = new M_Tipo();
+                tipo.setId(rs.getInt("id"));
+                tipo.setNombre(rs.getString("nombre"));
+                
+                tipos.add(tipo);
+            }
+            
+            db.desconectar();
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo obtener los tipos.");
+            System.out.println(e.getMessage());
+        }
+        return tipos;
+    }
+    
 }
 
 

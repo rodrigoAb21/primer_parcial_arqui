@@ -178,4 +178,32 @@ public class M_Cliente {
         return clientes;
     }
     
+     public ArrayList<M_Cliente> getClientesAsc(){
+        ArrayList<M_Cliente> clientes = new ArrayList<>();
+        try {
+            db.conectar();
+            String query = "SELECT * FROM cliente ORDER BY(id) ASC";
+            PreparedStatement ps = db.getConexion().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                M_Cliente cliente = new M_Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setNit(rs.getString("nit"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getString("telefono"));
+                
+                clientes.add(cliente);
+            }
+            
+            db.desconectar();
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo obtener los clientes.");
+            System.out.println(e.getMessage());
+        }
+        return clientes;
+    }
+    
 }

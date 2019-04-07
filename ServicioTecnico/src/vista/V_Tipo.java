@@ -58,13 +58,13 @@ public class V_Tipo extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "NOMBRE"
+
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {

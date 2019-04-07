@@ -46,7 +46,7 @@ public class C_Equipo implements ActionListener {
     
     private void actualizarVista(){
         vista_equipo.actualizarTabla(modelo_equipo.getEquipos());
-        vista_equipo.cargarSelector(modelo_tipo.getTipos());
+        vista_equipo.cargarSelector(modelo_tipo.getTiposAsc());
     }
 
     @Override

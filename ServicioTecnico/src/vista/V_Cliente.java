@@ -70,13 +70,13 @@ public class V_Cliente extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID", "NIT", "NOMBRE", "DIRECCION", "TELEFONO"
+
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {

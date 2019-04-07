@@ -60,13 +60,10 @@ public class V_Herramienta extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "ID", "NOMBRE", "MARCA"
+
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
