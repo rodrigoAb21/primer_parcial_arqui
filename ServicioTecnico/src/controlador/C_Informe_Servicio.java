@@ -38,6 +38,8 @@ public class C_Informe_Servicio implements ActionListener {
         
         
         this.vista_informe_servicio.setVisible(true);
+        this.vista_informe_servicio.txt_costo_total.setEditable(false);
+        this.vista_informe_servicio.txt_estado.setEditable(false);
         actualizarVista();
         
         
@@ -47,6 +49,11 @@ public class C_Informe_Servicio implements ActionListener {
         vista_informe_servicio.actualizarTabla(modelo_informe_servicio.getInformes());
         vista_informe_servicio.cargarSelector(modelo_cliente.getClientesAsc());
     }
+    
+    private float calcularTotal(int informe_id){
+        //Sumatoria de los detalles
+        return 0f;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -55,8 +62,8 @@ public class C_Informe_Servicio implements ActionListener {
             modelo_informe_servicio.setId(Integer.parseInt(vista_informe_servicio.txt_id.getText()));
             modelo_informe_servicio.setFecha_recepcion(vista_informe_servicio.txt_fecha_recepcion.getText());
             modelo_informe_servicio.setFecha_finalizacion(vista_informe_servicio.txt_fecha_finalizacion.getText());
-            modelo_informe_servicio.setCosto_total(Float.parseFloat(vista_informe_servicio.txt_costo_total.getText()));
-            modelo_informe_servicio.setEstado(vista_informe_servicio.txt_estado.getText());
+            modelo_informe_servicio.setCosto_total(0f);
+            modelo_informe_servicio.setEstado("Activo");
             
             String tipo[] = vista_informe_servicio.selector_cliente.getSelectedItem().toString().split(",");
             modelo_informe_servicio.setCliente_id(Integer.parseInt(tipo[0]));
@@ -74,7 +81,8 @@ public class C_Informe_Servicio implements ActionListener {
                 modelo_informe_servicio.setId(Integer.parseInt(vista_informe_servicio.txt_id.getText()));
                 modelo_informe_servicio.setFecha_recepcion(vista_informe_servicio.txt_fecha_recepcion.getText());
                 modelo_informe_servicio.setFecha_finalizacion(vista_informe_servicio.txt_fecha_finalizacion.getText());
-                                 
+                modelo_informe_servicio.setEstado(vista_informe_servicio.txt_estado.getText());
+                
                 String tipo[] = vista_informe_servicio.selector_cliente.getSelectedItem().toString().split(",");
                 modelo_informe_servicio.setCliente_id(Integer.parseInt(tipo[0]));
                 

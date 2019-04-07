@@ -124,8 +124,6 @@ public class M_Informe_Servicio {
             String sql = "UPDATE informe_servicio SET " + 
                     "fecha_recepcion = ?, " +
                     "fecha_finalizacion = ?, " +
-                    "costo_total = ?, " +
-                    "estado = ?, " +
                     "cliente_id = ? " + "WHERE id = ?";
             PreparedStatement ps = db.getConexion().prepareStatement(sql);
             ps.setString(1, this.fecha_recepcion);
@@ -191,6 +189,27 @@ public class M_Informe_Servicio {
             System.out.println(e.getMessage());
         }
         return informe_servicios;
+    }
+    
+    
+    public boolean actualizarEstado(String estado){
+        try {
+            db.conectar();
+            String sql = "UPDATE informe_servicio SET " + 
+                    "estado = ? " + "WHERE id = ?";
+            PreparedStatement ps = db.getConexion().prepareStatement(sql);
+            ps.setString(1, estado);
+            ps.setInt(2, this.id);
+            
+            int i = ps.executeUpdate();
+            db.desconectar();
+            return i > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo actualiza el estdao del informe");
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
     
 }

@@ -275,13 +275,14 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
         int fila = tabla_servicios.getSelectedRow();
         txt_id.setText(m.getValueAt(fila, 0).toString());
         txt_fecha_recepcion.setText(m.getValueAt(fila, 1).toString());
-        txt_costo_total.setText(m.getValueAt(fila, 2).toString());
-        txt_estado.setText(m.getValueAt(fila, 3).toString());
+        txt_fecha_finalizacion.setText(m.getValueAt(fila, 2).toString());
+        txt_costo_total.setText(m.getValueAt(fila, 3).toString());
+        txt_estado.setText(m.getValueAt(fila, 4).toString());
         
         DefaultComboBoxModel c = (DefaultComboBoxModel) selector_cliente.getModel();
         for (int i = 0; i < c.getSize(); i++) {
             String tipo[] = selector_cliente.getItemAt(i).toString().split(",");
-            if (m.getValueAt(fila, 4).toString().equals(tipo[0])) {
+            if (m.getValueAt(fila, 5).toString().equals(tipo[0])) {
                 selector_cliente.setSelectedIndex(i);
                 break;
             }
@@ -299,6 +300,7 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
     public void limpiarCampos(){
         txt_id.setText("");
         txt_fecha_recepcion.setText("");
+        txt_fecha_finalizacion.setText("");
         txt_costo_total.setText("");
         txt_estado.setText("");
         
