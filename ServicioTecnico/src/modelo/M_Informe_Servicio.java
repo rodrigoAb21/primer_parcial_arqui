@@ -210,5 +210,24 @@ public class M_Informe_Servicio {
         }
     }
     
+    public boolean actualizarCostoTotal(int id, float total){
+        try {
+            db.conectar();
+            String sql = "UPDATE informe_servicio SET " + 
+                    "costo_total = ? " + "WHERE id = ?";
+            PreparedStatement ps = db.getConexion().prepareStatement(sql);
+            ps.setFloat(1, total);
+            ps.setInt(2, id);
+            
+            int i = ps.executeUpdate();
+            db.desconectar();
+            return i > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo actualiza el costo_total del informe");
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }
 

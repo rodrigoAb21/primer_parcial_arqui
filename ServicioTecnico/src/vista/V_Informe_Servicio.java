@@ -10,6 +10,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.M_Informe_Servicio;
 import modelo.M_Cliente;
+import modelo.M_Detalle_Informe;
 import modelo.M_Equipo;
 
 /**
@@ -62,10 +63,11 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
         btn_agregar = new javax.swing.JButton();
         btn_quitar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_cargar_detalle = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txt_fecha_finalizacion = new javax.swing.JTextField();
         btn_editar_detalle = new javax.swing.JButton();
+        btn_finalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +85,7 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
 
         btn_editar.setText("EDITAR");
 
-        btn_eliminar.setText("ELIMINAR");
+        btn_eliminar.setText("ANULAR");
 
         btn_limpiar.setText("LIMPIAR");
 
@@ -141,11 +143,13 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
 
         jButton3.setText("GESTIONAR TRABAJOS");
 
-        jButton4.setText("FINALIZAR SERVICIO");
+        btn_cargar_detalle.setText("CARGAR DETALLE");
 
         jLabel10.setText("F. FINALIZACION");
 
         btn_editar_detalle.setText("EDITAR");
+
+        btn_finalizar.setText("FINALIZAR SERVICIO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,12 +214,16 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
                                         .addComponent(btn_quitar))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(268, 268, 268)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(271, 271, 271)
-                                .addComponent(jButton4)))
+                                .addComponent(jButton3)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(25, 25, 25)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(201, 201, 201)
+                .addComponent(btn_cargar_detalle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_finalizar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,9 +275,11 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_cargar_detalle)
+                    .addComponent(btn_finalizar))
+                .addContainerGap())
         );
 
         pack();
@@ -312,7 +322,7 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
         
     }
     
-    public void actualizarTabla(ArrayList<M_Informe_Servicio> equipos){
+    public void actualizarTablaInformes(ArrayList<M_Informe_Servicio> equipos){
         DefaultTableModel dtm = new DefaultTableModel();
         tabla_servicios.setModel(dtm);
         dtm.addColumn("ID");
@@ -332,6 +342,26 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
             fila[5] = equipos.get(i).getCliente_id();
             
             dtm.addRow(fila);
+        }
+        
+    }
+    
+     public void actualizarTablaDetalle(ArrayList<M_Detalle_Informe> detalles){
+        DefaultTableModel dfm2 = new DefaultTableModel();
+        tabla_detalle.setModel(dfm2);
+        dfm2.addColumn("INFORME_ID");
+        dfm2.addColumn("EQUIPO_ID");
+        dfm2.addColumn("COSTO");
+        dfm2.addColumn("OBSERVACION");
+        
+        Object[] fila = new Object[4];
+        for (int i = 0; i < detalles.size(); i++) {
+            fila[0] = detalles.get(i).getInforme_id();
+            fila[1] = detalles.get(i).getEquipo_id();
+            fila[2] = detalles.get(i).getCosto();
+            fila[3] = detalles.get(i).getObservacion();
+            
+            dfm2.addRow(fila);
         }
         
     }
@@ -390,14 +420,15 @@ public class V_Informe_Servicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_agregar;
+    public javax.swing.JButton btn_cargar_detalle;
     public javax.swing.JButton btn_editar;
     public javax.swing.JButton btn_editar_detalle;
     public javax.swing.JButton btn_eliminar;
+    public javax.swing.JButton btn_finalizar;
     public javax.swing.JButton btn_limpiar;
     public javax.swing.JButton btn_quitar;
     public javax.swing.JButton btn_registrar;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

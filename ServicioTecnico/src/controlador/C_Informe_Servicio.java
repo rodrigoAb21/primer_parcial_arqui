@@ -24,6 +24,10 @@ public class C_Informe_Servicio implements ActionListener {
     private M_Equipo modelo_equipo;
     private M_Detalle_Informe modelo_detalle;
     private V_Informe_Servicio vista_informe_servicio;
+    
+    private int informe_seleccionado = -1;
+    private int detalle_seleccionado = -1;
+    
 
     public C_Informe_Servicio() {
         this.modelo_informe_servicio = new M_Informe_Servicio();
@@ -36,10 +40,20 @@ public class C_Informe_Servicio implements ActionListener {
     }
     
     public void initComponent(){
+        //Botones informe
         this.vista_informe_servicio.btn_registrar.addActionListener(this);
         this.vista_informe_servicio.btn_editar.addActionListener(this);
         this.vista_informe_servicio.btn_eliminar.addActionListener(this);
         this.vista_informe_servicio.btn_limpiar.addActionListener(this);
+        this.vista_informe_servicio.btn_cargar_detalle.addActionListener(this);
+        this.vista_informe_servicio.btn_finalizar.addActionListener(this);
+        
+        // Botones Detalle
+        this.vista_informe_servicio.btn_agregar.addActionListener(this);
+        this.vista_informe_servicio.btn_quitar.addActionListener(this);
+        this.vista_informe_servicio.btn_editar_detalle.addActionListener(this);
+        
+        // Selectores
         this.vista_informe_servicio.selector_cliente.addActionListener(this);
         this.vista_informe_servicio.selector_equipo.addActionListener(this);
         
@@ -53,13 +67,15 @@ public class C_Informe_Servicio implements ActionListener {
     }
     
     private void actualizarVista(){
-        vista_informe_servicio.actualizarTabla(modelo_informe_servicio.getInformes());
+        vista_informe_servicio.actualizarTablaInformes(modelo_informe_servicio.getInformes());
         vista_informe_servicio.cargarSelectorCliente(modelo_cliente.getClientesAsc());
         vista_informe_servicio.cargarSelectorEquipo(modelo_equipo.getEquipos());
+        
+        
     }
     
-    private float calcularTotal(int informe_id){
-        return modelo_detalle.calcularTotal(informe_id);
+    private void actualizarTotal(int informe_id){
+        modelo_informe_servicio.actualizarCostoTotal(informe_id, modelo_detalle.calcularTotal(informe_id));
     }
 
     @Override
@@ -72,8 +88,8 @@ public class C_Informe_Servicio implements ActionListener {
             modelo_informe_servicio.setCosto_total(0f);
             modelo_informe_servicio.setEstado("Activo");
 
-            String tipo[] = vista_informe_servicio.selector_cliente.getSelectedItem().toString().split(",");
-            modelo_informe_servicio.setCliente_id(Integer.parseInt(tipo[0]));
+            String cliente[] = vista_informe_servicio.selector_cliente.getSelectedItem().toString().split(",");
+            modelo_informe_servicio.setCliente_id(Integer.parseInt(cliente[0]));
 
             if (modelo_informe_servicio.registrar()) {
                 JOptionPane.showMessageDialog(null, "Se registro un equipo");
@@ -116,6 +132,19 @@ public class C_Informe_Servicio implements ActionListener {
         } else if (e.getSource() == vista_informe_servicio.btn_agregar) {
             // AGREGAR DETALLE
             // Se debe registrar un nuevo detalle servicio y actualizar tabla detalle
+
+
+            modelo_detalle.setInforme_id(this.informe_seleccionado);
+
+            String equipo[] = vista_informe_servicio.selector_equipo.getSelectedItem().toString().split(",");
+            modelo_detalle.setEquipo_id(Integer.parseInt(equipo[0]));
+
+            modelo_detalle.setCosto(0f);
+            modelo_detalle.setObservacion(vista_informe_servicio.txt_observacion.getText().toString());
+            modelo_detalle.registrar();
+            recargarDetalle(this.informe_seleccionado);
+
+            
             // Se debe actualizar el costo total del servicio
         } else if (e.getSource() == vista_informe_servicio.btn_editar_detalle) {
             // EDITAR DETALLE
@@ -125,7 +154,32 @@ public class C_Informe_Servicio implements ActionListener {
             // QUITAR DETALLE
             // Se debe eliminar el detalle servicio y actualizar la tabla detalle
             // Se debe actualizar el costo total del servicio
+        } else if (e.getSource() == vista_informe_servicio.btn_cargar_detalle) {
+            // CARGAR DETALLE
+            cargarDetalle();
         }
+    }
+    
+    private void cargarDetalle(){
+        int fila = vista_informe_servicio.tabla_servicios.getSelectedRow();
+        if (fila >= 0) {
+            int id = Integer.parseInt(vista_informe_servicio.tabla_servicios.getValueAt(fila, 0).toString());
+            this.informe_seleccionado = id;
+            actualizarTotal(id);
+            actualizarVista();
+            vista_informe_servicio.actualizarTablaDetalle(modelo_detalle.getDetalles(id));
+            
+        }
+        
+    }
+    
+     private void recargarDetalle(int id){
+        if (id > 0) {
+            actualizarTotal(id);
+            actualizarVista();
+            vista_informe_servicio.actualizarTablaDetalle(modelo_detalle.getDetalles(id));
+        }
+        
     }
     
     public static void main(String[] args) {
